@@ -1,15 +1,52 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <input type="text" placeholder="Enter UniqueID" class="form-input" name="unique_id" v-model="unique_id" id="unique_id" readonly="">
-            <input type="text" placeholder="Enter Name" class="form-input" name="name" v-model="name" id="name" required>
-            <select class="form-input" name="gender" v-model="gender" id="gender" required>
+            <div class="form-input" style="display: flex;align-items: center;">
+                <div style="width: 30%;">UniqueID
+                </div>
+                <div style="width: 70%;overflow: auto;">{{unique_id}}
+                </div>
+            </div>
+            <div class="form-input" style="display: flex;align-items: center;">
+                <div style="width: 30%;">Name
+                </div>
+                <div style="width: 70%;overflow: auto;">{{name}}
+                </div>
+            </div>
+            <div class="form-input" style="display: flex;align-items: center;">
+                <div style="width: 30%;">Gender
+                </div>
+                <div style="width: 70%;overflow: auto;">{{gender}}
+                </div>
+            </div>
+            <div class="form-input" style="display: flex;align-items: center;">
+                <div style="width: 30%;">Age
+                </div>
+                <div style="width: 70%;overflow: auto;">{{age}}
+                </div>
+            </div>
+            <div class="form-input" style="display: flex;align-items: center;">
+                <div style="width: 30%;">Phone
+                </div>
+                <div style="width: 70%;overflow: auto;">{{phone}}
+                </div>
+            </div>
+            <div class="form-input" style="display: flex;align-items: center;">
+                <div style="width: 30%;">Chamber
+                </div>
+                <div style="width: 70%;overflow: auto;">{{assigned_chamber}}
+                </div>
+            </div>
+           
+            <!-- <input type="text" placeholder="Enter UniqueID" class="form-input" name="unique_id" v-model="unique_id" id="unique_id" readonly="">
+            <input type="text" placeholder="Enter Name" class="form-input" name="name" v-model="name" id="name" required readonly>
+            <select class="form-input" name="gender" v-model="gender" id="gender" required readonly>
                 <option value="">Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
             </select>
             <input type="number" placeholder="Enter Chamber Name" class="form-input" name="age" v-model="age" id="age" readonly>
-            <input type="number" placeholder="Enter Phone Number" class="form-input" name="phone" v-model="phone" id="phone" readonly>
+            <input type="number" placeholder="Enter Phone Number" class="form-input" name="phone" v-model="phone" id="phone" readonly> -->
             <!-- <input type="text" placeholder="Enter Chamber Address" class="form-input" name="treatment" v-model="treatment" id="treatment" readonly> -->
             <span class="mt-3">Treatment Given</span>
 
@@ -68,6 +105,7 @@
                     vm.age = vm.patientInfo[0].age
                     vm.phone = vm.patientInfo[0].phone
                     vm.treatment = vm.patientInfo[0].treatment
+                    vm.assigned_chamber = vm.patientInfo[0].assigned_chamber
                 }).catch(function (error) {
                 });
             },
@@ -89,12 +127,15 @@
             },
 
             saveTreatment(){
+                var accessToken = JSON.parse(this.getAccesstoken());
                 var vm = this;
                 if(this.givenTreatment.length==0){
                     alert("Please select treatment.")
                     return false;
                 }
                 var form_data = new FormData();
+
+                form_data.append("doctor_id", accessToken.user.id);
                 form_data.append("patient_id", this.$route.params.patient_id);
                 form_data.append("givenTreatment", this.givenTreatment);
                 axios({
@@ -103,8 +144,7 @@
                         method: "post",
                         data: form_data,
                 }).then(function (response) {
-                    console.log(response)
-                    if(response.data.code==200){
+                    if(response.status==200){
                         vm.$router.push('/success') 
                     }
                     else{
@@ -142,7 +182,7 @@
         border-radius: 20px;
         width: 85%;
         margin-top: 5%;
-        padding-left: 10px;
+        padding-left: 15px;
         background: white;
         height: 37px;
    }

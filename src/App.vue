@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-  	<Header v-if="this.$route.path!='/' && this.$route.path!='/bp/dashboard' && this.$route.path!='/login' && this.$route.path!='/sp/dashboard'"></Header>
+  	<Header v-if="this.$route.path!='/' && this.$route.path!='/bp/dashboard' && this.$route.path!='/login' && this.$route.path!='/sp/dashboard' && this.$route.path!='/doctor/dashboard'"></Header>
     <router-view></router-view>  
     <Footer v-if="this.$route.path!='/' && this.$route.path!='/user/dashboard' && this.$route.path!='/login'"></Footer>
     <img src="/assets/images/loading.gif" class="img-waiting">

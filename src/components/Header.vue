@@ -6,7 +6,7 @@
                 <img src="../../public/assets/images/back.png" alt="User Photo">
               </router-link>
             </div>
-            <div class="col-9 p-0 font-weight-bold pl-3" style="color: white;">
+            <div class="col-9 p-0 font-weight-bold pl-3 text-center" style="color: white;">
               {{headerText}}
             </div>
             <div class="col-2 pr-2" style="text-align:right;">
@@ -29,11 +29,12 @@
             }
         },
         created(){
-          if(this.$router.currentRoute.path=="/user/patient-information"){
-            this.headerText = "Patient Information Log";
+          console.log(this.$router.currentRoute.name)
+          if(this.$router.currentRoute.name=="PatientList"){
+            this.headerText = "Select Registered Patient";
           }
-          else if(this.$router.currentRoute.path=="/bp/add-patient" || this.$router.currentRoute.path=="/sp/add-doctor"){
-            this.headerText = "Please Fill out the informations";
+          else if(this.$router.currentRoute.name=="PatientInformation"){
+            this.headerText = "Patient Information";
           }
           var accessToken = JSON.parse(this.getAccesstoken())
           this.userRoute = "/doctor/dashboard";

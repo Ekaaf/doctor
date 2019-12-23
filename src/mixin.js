@@ -23,8 +23,8 @@ export default {
        
         getApiUrl(){
             // return 'https://'+document.domain+'/uniliver_laravel/api/auth/'
-            // return 'http://'+"npab.net"+'/smile_laravel/api/auth/'
-            return 'http://localhost/smile_laravel/api/auth/'
+            return 'http://'+"npab.net"+'/smile_laravel/api/auth/'
+            // return 'http://localhost/smile_laravel/api/auth/'
             // if(document.domain=='localhost'){
             //     return 'http://'+document.domain+'/uniliver_laravel/api/auth/'
             // }
